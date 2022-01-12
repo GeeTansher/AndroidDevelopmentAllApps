@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class carAdapter extends RecyclerView.Adapter<carAdapter.ViewHolder>
 {
-    private ArrayList<car> cars;
+    private final ArrayList<car> cars;
 
     itemClicked activity;
     public interface itemClicked

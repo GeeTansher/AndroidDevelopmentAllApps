@@ -21,6 +21,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/colourPrimary"
+            android:onClick="setBtnCarInfo"
             android:text="CAR INFO"
             android:textColor="@color/white"
             android:textStyle="bold"
