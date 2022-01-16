@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Persons Details Store</string>
+    <string name="app_name">PersonsDetailsStore</string>
+    <string name="data">Data from the database will be stored here.</string>
 </resources>
