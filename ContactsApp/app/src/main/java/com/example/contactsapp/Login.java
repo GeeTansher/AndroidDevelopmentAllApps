@@ -5,16 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Login extends AppCompatActivity {
 
     private View pblogin;
     private View lvform;
     private TextView tvload;
+
+    EditText etmail, etpassword;
+    Button btnlogin,btnregister;
+    TextView tvreset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +32,40 @@ public class Login extends AppCompatActivity {
         pblogin=findViewById(R.id.pblogin);
         lvform=findViewById(R.id.lvform);
         tvload =findViewById(R.id.tvload);
+
+        etmail = findViewById(R.id.etmail);
+        etpassword = findViewById(R.id.etpassword);
+        btnlogin = findViewById(R.id.btnlogin);
+        btnregister = findViewById(R.id.btnregister);
+        tvreset = findViewById(R.id.tvreset);
+
+        btnlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnregister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(new Intent(Login.this,Register.class));
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+        tvreset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
     }
 
