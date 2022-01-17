@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int num = Integer.parseInt(n1.getText().toString());
                 textView.setText(num + " x " + 0 + " = " + num * 0 + "\n"+
-                num + " x " + 1 + " = " + num * 1 + "\n"+
+                num + " x " + 1 + " = " + num + "\n"+
                 num + " x " + 2 + " = " + num * 2 + "\n"+
                 num + " x " + 3 + " = " + num * 3 + "\n"+
                 num + " x " + 4 + " = " + num * 4 + "\n"+

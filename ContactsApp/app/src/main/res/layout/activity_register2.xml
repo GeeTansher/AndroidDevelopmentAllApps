@@ -9,7 +9,7 @@
     tools:context=".Login">
 
     <ProgressBar
-        android:id="@+id/pblogin"
+        android:id="@+id/pbLogin"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:indeterminateTint="@color/colourAccent" />
 
     <TextView
-        android:id="@+id/tvload"
+        android:id="@+id/tvLoad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -35,25 +35,30 @@
         android:visibility="gone"/>
 
     <LinearLayout
-        android:id="@+id/lvform"
+        android:id="@+id/lvForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="40dp"
-            app:srcCompat="@drawable/lock" />
-
         <EditText
-            android:id="@+id/etmail"
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="Please enter your name"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/etMail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             android:ems="10"
             android:gravity="center_horizontal"
@@ -62,7 +67,7 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/etpassword"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -74,48 +79,28 @@
             android:inputType="textPassword"
             android:minHeight="48dp" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/etRepassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btnlogin"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/buttons"
-                android:text="Login"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/btnregister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/buttons"
-                android:text="Register"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvreset"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
             android:gravity="center_horizontal"
-            android:minHeight="48dp"
-            android:text="Forget Password?? Reset Here..."
-            android:textColor="#0000b2" />
+            android:hint="Please enter your password again"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/buttons"
+            android:text="Register" />
     </LinearLayout>
 
 </LinearLayout>

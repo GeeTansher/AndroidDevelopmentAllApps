@@ -1,7 +1,6 @@
 package com.example.contactsapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -19,47 +18,47 @@ import com.backendless.BackendlessUser;
 import com.backendless.async.callback.AsyncCallback;
 import com.backendless.exceptions.BackendlessFault;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
-    private View pblogin;
-    private View lvform;
-    private TextView tvload;
+    private View pbLogin;
+    private View lvForm;
+    private TextView tvLoad;
 
-    EditText etname, etpassword, etmail, etrepassword;
-    Button btnregister;
+    EditText etName, etPassword, etMail, etRepassword;
+    Button btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register2);
 
-        pblogin=findViewById(R.id.pblogin);
-        lvform=findViewById(R.id.lvform);
-        tvload =findViewById(R.id.tvload);
+        pbLogin=findViewById(R.id.pbLogin);
+        lvForm =findViewById(R.id.lvForm);
+        tvLoad =findViewById(R.id.tvLoad);
 
-        etname = findViewById(R.id.etname);
-        etmail = findViewById(R.id.etmail);
-        etpassword = findViewById(R.id.etpassword);
-        etrepassword = findViewById(R.id.etrepassword);
-        btnregister = findViewById(R.id.btnregister);
+        etName = findViewById(R.id.etName);
+        etMail = findViewById(R.id.etMail);
+        etPassword = findViewById(R.id.etPassword);
+        etRepassword = findViewById(R.id.etRepassword);
+        btnRegister = findViewById(R.id.btnRegister);
 
-        btnregister.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(etname.getText().toString().trim().isEmpty() ||
-                        etpassword.getText().toString().trim().isEmpty()||
-                        etrepassword.getText().toString().trim().isEmpty()||
-                        etmail.getText().toString().trim().isEmpty())
+                if(etName.getText().toString().trim().isEmpty() ||
+                        etPassword.getText().toString().trim().isEmpty()||
+                        etRepassword.getText().toString().trim().isEmpty()||
+                        etMail.getText().toString().trim().isEmpty())
                 {
-                    Toast.makeText(Register.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Please enter all fields", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    if(etpassword.getText().toString().trim().equals(etrepassword.getText().toString().trim()))
+                    if(etPassword.getText().toString().trim().equals(etRepassword.getText().toString().trim()))
                     {
-                        String name= etname.getText().toString().trim();
-                        String email = etmail.getText().toString().trim();
-                        String password = etpassword.getText().toString().trim();
+                        String name= etName.getText().toString().trim();
+                        String email = etMail.getText().toString().trim();
+                        String password = etPassword.getText().toString().trim();
 
                         BackendlessUser user = new BackendlessUser();
                         user.setEmail(email);
@@ -74,20 +73,20 @@ public class Register extends AppCompatActivity {
                                 showProgress(false);
                                 // as we coming in register activity form login activity
                                 // so when we will finish this we will go back to login activity
-                                Toast.makeText(Register.this, "User Successfully Register", Toast.LENGTH_SHORT).show();
-                                Register.this.finish();
+                                Toast.makeText(RegisterActivity.this, "User Successfully Register", Toast.LENGTH_SHORT).show();
+                                RegisterActivity.this.finish();
                             }
 
                             @Override
                             public void handleFault(BackendlessFault fault) {
-                                Toast.makeText(Register.this, "ERROR: "+fault.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "ERROR: "+fault.getMessage(), Toast.LENGTH_SHORT).show();
                                 showProgress(false);
                             }
                         });
                     }
                     else
                     {
-                        Toast.makeText(Register.this, "Please make sure that your password and retype password in same.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Please make sure that your password and retype password in same.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -103,38 +102,38 @@ public class Register extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            lvform.setVisibility(show ? View.GONE : View.VISIBLE);
-            lvform.animate().setDuration(shortAnimTime).alpha(
+            lvForm.setVisibility(show ? View.GONE : View.VISIBLE);
+            lvForm.animate().setDuration(shortAnimTime).alpha(
                     show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    lvform.setVisibility(show ? View.GONE : View.VISIBLE);
+                    lvForm.setVisibility(show ? View.GONE : View.VISIBLE);
                 }
             });
 
-            pblogin.setVisibility(show ? View.VISIBLE : View.GONE);
-            pblogin.animate().setDuration(shortAnimTime).alpha(
+            pbLogin.setVisibility(show ? View.VISIBLE : View.GONE);
+            pbLogin.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    pblogin.setVisibility(show ? View.VISIBLE : View.GONE);
+                    pbLogin.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
 
-            tvload.setVisibility(show ? View.VISIBLE : View.GONE);
-            tvload.animate().setDuration(shortAnimTime).alpha(
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    tvload.setVisibility(show ? View.VISIBLE : View.GONE);
+                    tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
                 }
             });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            pblogin.setVisibility(show ? View.VISIBLE : View.GONE);
-            tvload.setVisibility(show ? View.VISIBLE : View.GONE);
-            lvform.setVisibility(show ? View.GONE : View.VISIBLE);
+            pbLogin.setVisibility(show ? View.VISIBLE : View.GONE);
+            tvLoad.setVisibility(show ? View.VISIBLE : View.GONE);
+            lvForm.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
 

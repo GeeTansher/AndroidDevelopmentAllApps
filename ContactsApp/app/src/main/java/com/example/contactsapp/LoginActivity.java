@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private View pblogin;
     private View lvform;
@@ -27,16 +27,16 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login2);
 
-        pblogin=findViewById(R.id.pblogin);
-        lvform=findViewById(R.id.lvform);
-        tvload =findViewById(R.id.tvload);
+        pblogin=findViewById(R.id.pbLogin);
+        lvform=findViewById(R.id.lvForm);
+        tvload =findViewById(R.id.tvLoad);
 
-        etmail = findViewById(R.id.etmail);
-        etpassword = findViewById(R.id.etpassword);
+        etmail = findViewById(R.id.etMail);
+        etpassword = findViewById(R.id.etPassword);
         btnlogin = findViewById(R.id.btnlogin);
-        btnregister = findViewById(R.id.btnregister);
+        btnregister = findViewById(R.id.btnRegister);
         tvreset = findViewById(R.id.tvreset);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -50,11 +50,11 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    startActivity(new Intent(Login.this,Register.class));
+                    startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 }
                 catch (Exception e)
                 {
-                    Toast.makeText(Login.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
                 }
 
             }
