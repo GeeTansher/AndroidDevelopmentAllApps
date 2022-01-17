@@ -42,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         etRepassword = findViewById(R.id.etRepassword);
         btnRegister = findViewById(R.id.btnRegister);
 
+        tvLoad.setText("Registering user... Please wait...");
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
