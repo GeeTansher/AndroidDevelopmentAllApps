@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactsApp">
         <activity
+            android:name=".ContactList"
+            android:exported="false" />
+        <activity
+            android:name=".NewContact"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                     Backendless.UserService.login(email, password, new AsyncCallback<BackendlessUser>() {
                         @Override
                         public void handleResponse(BackendlessUser response) {
+                            ApplicationClass.user = response;
                             Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             LoginActivity.this.finish();
@@ -137,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void handleResponse(BackendlessUser response) {
 
+                            ApplicationClass.user = response;
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                             LoginActivity.this.finish();
                         }
