@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ContactsApp">
         <activity
+            android:name=".ContactInfo"
+            android:exported="false" />
+        <activity
             android:name=".ContactList"
             android:exported="false" />
         <activity

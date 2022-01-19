@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colourPrimaryLight"
     android:orientation="vertical"
-    tools:context=".NewContact">
+    tools:context=".ContactList">
 
     <ProgressBar
         android:id="@+id/pbLogin"
