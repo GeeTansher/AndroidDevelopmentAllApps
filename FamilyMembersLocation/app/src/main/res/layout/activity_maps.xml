@@ -23,6 +23,12 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MapsActivity" />
+        tools:context=".MapsActivity"
+        map:uiCompass="true"
+        map:uiRotateGestures="true"
+        map:uiTiltGestures="true"
+        map:uiScrollGestures="true"
+        map:uiZoomGestures="true"
+        map:uiZoomControls="true"/>
 </LinearLayout>
 

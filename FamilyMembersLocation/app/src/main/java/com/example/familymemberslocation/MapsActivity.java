@@ -15,9 +15,17 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.backendless.Backendless;
+import com.backendless.async.callback.AsyncCallback;
+import com.backendless.exceptions.BackendlessFault;
+import com.backendless.persistence.BackendlessDataQuery;
+import com.backendless.persistence.DataQueryBuilder;
 import com.backendless.persistence.Point;
+import com.backendless.persistence.QueryOptions;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -27,7 +35,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.familymemberslocation.databinding.ActivityMapsBinding;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback , LocationListener {
 
@@ -50,6 +62,99 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
 
         ibSend = (ImageButton) findViewById(R.id.ibsend);
+        String type=getIntent().getStringExtra("type");
+
+        if(type.equals("Family"))
+        {
+            ibSend.setVisibility(View.GONE);
+
+//            BackendlessDataQuery query = new BackendlessDataQuery();
+//            query.setWhereClause("categories = Family");
+//
+//            Backendless.Data.of("Locations").find(query, new AsyncCallback<List<Map>>() {
+//                @Override
+//                public void handleResponse(List<Map> response) {
+//
+//                }
+//
+//                @Override
+//                public void handleFault(BackendlessFault fault) {
+//
+//                }
+//            });
+        }
+        else
+        {
+            ibSend.setVisibility(View.VISIBLE);
+
+        }
+
+        ibSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MapsActivity.this, "Busy sending location...", Toast.LENGTH_SHORT).show();
+                Map<String,Object> meta = new HashMap<String,Object>();
+                if(!isExistingPoint)
+                {
+                    List<String> categories=new ArrayList<>();
+                    categories.add("Family");
+
+                    meta.put("name",getIntent().getStringExtra("type"));
+                    meta.put("updated",new Date().toString());
+                    meta.put("Location",new Point().setLatitude(lat).setLongitude(lng));
+                    meta.put("categories",categories);
+
+                    Backendless.Data.of("Locations").save(meta, new AsyncCallback<Map>() {
+                        @Override
+                        public void handleResponse(Map response) {
+                            Toast.makeText(MapsActivity.this, "Successfully saved location.", Toast.LENGTH_SHORT).show();
+                            isExistingPoint=true;
+                            existingPoint= (Point) response.get("Location");
+                        }
+
+                        @Override
+                        public void handleFault(BackendlessFault fault) {
+                            Toast.makeText(MapsActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+                else
+                {
+                    Backendless.Data.of("Loactions").remove(meta, new AsyncCallback<Long>() {
+                        @Override
+                        public void handleResponse(Long response) {
+                            List<String> categories=new ArrayList<>();
+                            categories.add("Family");
+
+                            meta.put("name",getIntent().getStringExtra("type"));
+                            meta.put("updated",new Date().toString());
+                            meta.put("Location",new Point().setLatitude(lat).setLongitude(lng));
+                            meta.put("categories",categories);
+
+                            Backendless.Data.of("Locations").save(meta, new AsyncCallback<Map>() {
+                                @Override
+                                public void handleResponse(Map response) {
+                                    Toast.makeText(MapsActivity.this, "Successfully saved location.", Toast.LENGTH_SHORT).show();
+                                    isExistingPoint=true;
+                                    existingPoint= (Point) response.get("Location");
+                                }
+
+                                @Override
+                                public void handleFault(BackendlessFault fault) {
+                                    Toast.makeText(MapsActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void handleFault(BackendlessFault fault) {
+                            Toast.makeText(MapsActivity.this, fault.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
