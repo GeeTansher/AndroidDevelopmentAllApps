@@ -28,28 +28,25 @@
 
         <TextView
             android:id="@+id/tvOutOfQuestion"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:text="@string/outOfTextQuestion"
-            android:textColor="@color/white"
-            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            style="@style/outOfQuestionThemTV" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvQuestion"
             android:layout_width="match_parent"
             android:layout_height="153dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="52dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="#18213A"
             android:elevation="12dp"
             app:cardCornerRadius="6dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvOutOfQuestion">
 
@@ -59,7 +56,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/questionTextPadding"
-                android:text="@string/placeHolderQuestion"
                 android:textColor="@color/white" />
         </androidx.cardview.widget.CardView>
 
@@ -95,6 +91,22 @@
             app:layout_constraintHorizontal_bias="0.883"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnFalse" />
+
+        <TextView
+            android:id="@+id/tvScore"
+            style="@style/currentScoreTV"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvOutOfQuestion"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvHighScore"
+            style="@style/currentScoreTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvOutOfQuestion"
+            app:layout_constraintTop_toBottomOf="@+id/tvScore" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

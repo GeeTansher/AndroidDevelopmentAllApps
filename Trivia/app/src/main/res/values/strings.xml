@@ -5,7 +5,6 @@
     <string name="trueButton">True</string>
     <string name="falseButoon">False</string>
     <string name="nextButton">Next</string>
-    <string name="placeHolderQuestion">Place to enter Question.....</string>
     <string name="formattedTextViewOutOfQuestion">Question: %d/%d</string>
     <string name="incorrectAns">Incorrect  Answer !!</string>
     <string name="correctAns">Correct Answer !!</string>
