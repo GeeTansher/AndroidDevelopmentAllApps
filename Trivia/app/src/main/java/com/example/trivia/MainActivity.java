@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         prefs = new Prefs(MainActivity.this);
         score = new ScoreClass();
-//        currentQuesIndex=prefs.getState();
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         /*
          This use of interface is when android will be getting data it will not wait for
@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
         int snackMessageId;
         if (b == ans) {
             snackMessageId = R.string.correctAns;
-//            Log.d("ans","true");
+
             Toast.makeText(this, R.string.correctAns, Toast.LENGTH_SHORT).show();
             fadeAnimation();
             addPoints();
         } else {
             snackMessageId = R.string.incorrectAns;
-//            Log.d("ans","incorrect");
+
             Toast.makeText(this, R.string.incorrectAns, Toast.LENGTH_SHORT).show();
             shakeAnimation();
             deductPoints();
@@ -107,13 +107,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onStart() {
+        super.onStart();
         binding.tvScore.setText(String.format("Score: %s", score.getScore()));
         binding.tvHighScore.setText(MessageFormat.format("High Score: {0}",
                 String.valueOf(prefs.getHighScore())));
-        if(helper1==1)
-            currentQuesIndex=prefs.getState();
+        if (helper1 == 1) {
+            currentQuesIndex = prefs.getState();
+            helper1 = 0;
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        binding.tvScore.setText(String.format("Score: %s", score.getScore()));
+        binding.tvHighScore.setText(MessageFormat.format("High Score: {0}",
+                String.valueOf(prefs.getHighScore())));
+
+        helper1 = 1;
     }
 
     @Override
@@ -121,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
         prefs.saveHighestScore(score.getScore());
         prefs.setState(currentQuesIndex);
-        helper1=1;
     }
 
     private void deductPoints() {

@@ -30,9 +30,12 @@ public class Repository {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }if (callBack != null) {
+            }
+//            Log.d("Hello", questionArrayList.get(3).getStatement() + " ");
+            if (callBack != null) {
                 callBack.processFinished(questionArrayList);
             }
+//            Log.d("Hello", questionArrayList.get(3).getStatement() + " ");
 
         }, error -> {
 
