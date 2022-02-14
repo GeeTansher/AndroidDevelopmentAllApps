@@ -2,33 +2,32 @@ package com.example.contactmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.contactmanager.adapter.RecyclerViewAdapter;
 import com.example.contactmanager.model.ContactRoom;
 import com.example.contactmanager.model.ContactViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecyclerViewAdapter.OnContactClickListener {
+    public static final String CONTACT_ID = "contact_id";
     private static final int NEW_CONTACT_ACTIVITY_REQUEST_CODE = 1;
 
     //TODO: replace startActivityForResults() with new one...
+    //TODO: error of arrayOutOfBound when item is clicked on onContactClicked function.
 
     private ContactViewModel contactViewModel;
-    private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<String> arrayList;
+    //    private ArrayAdapter<String> arrayAdapter;
+//    private ArrayList<String> arrayList;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +40,10 @@ public class MainActivity extends AppCompatActivity {
          no the SQLite one so it's there only for code but no use in this app
         */
 
-        arrayList = new ArrayList<>();
+//        arrayList = new ArrayList<>();
+        recyclerView = findViewById(R.id.rvContactsList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         contactViewModel = new ViewModelProvider.AndroidViewModelFactory(MainActivity.this
                 .getApplication())
@@ -49,19 +51,25 @@ public class MainActivity extends AppCompatActivity {
 
         contactViewModel.getAllContacts().observe(MainActivity.this,
                 contactRooms -> {
-//                        StringBuilder builder = new StringBuilder();
+
+                    // set Recycler Adapter
+                    recyclerViewAdapter = new RecyclerViewAdapter(contactRooms, MainActivity.this,
+                            this);
+                    recyclerView.setAdapter(recyclerViewAdapter);
+
+/*
                     for (ContactRoom contactRoom : contactRooms) {
-//                            builder.append("-").append(contactRoom.getName()).append(" ").append(contactRoom.getOccupation()).append("\n");
-//                            Log.d("Ma", "onCreate: " + contactRoom.getName());
                         arrayList.clear();
                         arrayList.add(contactRoom.getName());
                     }
-                    // creating arrayAdapter
+//                     creating arrayAdapter
                     arrayAdapter = new ArrayAdapter<>(MainActivity.this,
                             android.R.layout.simple_list_item_1,
                             arrayList);
 
-                    // add to listview
+//                     add to listview
+                    lvContactList = setAdapter(arrayAdapter);
+*/
 
                 });
 
@@ -83,5 +91,15 @@ public class MainActivity extends AppCompatActivity {
                     data.getStringExtra(NewContact.OCCUPATION));
             ContactViewModel.insert(contactRoom);
         }
+    }
+
+    @Override
+    public void onContactClick(int position) {
+
+        ContactRoom contactRoom = Objects.requireNonNull(contactViewModel.allContacts
+                .getValue()).get(position);
+        Intent intent = new Intent(MainActivity.this, NewContact.class);
+        intent.putExtra(CONTACT_ID, contactRoom.getId());
+        startActivity(intent);
     }
 }

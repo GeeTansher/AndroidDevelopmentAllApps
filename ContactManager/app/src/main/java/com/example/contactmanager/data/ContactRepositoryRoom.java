@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.contactmanager.data.ContactDAO;
 import com.example.contactmanager.model.ContactRoom;
 import com.example.contactmanager.util.ContactRoomDatabase;
 
@@ -27,8 +26,18 @@ public class ContactRepositoryRoom {
     }
 
     public void insert(ContactRoom contactRoom){
-        ContactRoomDatabase.databaseWriteExecutor.execute(() -> {
-                contactDAO.insert(contactRoom);
-            });
+        ContactRoomDatabase.databaseWriteExecutor.execute(() -> contactDAO.insert(contactRoom));
+    }
+
+    public LiveData<ContactRoom> get(int id){
+        return contactDAO.get(id);
+    }
+
+    public void update(ContactRoom contactRoom){
+        ContactRoomDatabase.databaseWriteExecutor.execute(() -> contactDAO.update(contactRoom));
+    }
+
+    public void delete(ContactRoom contactRoom){
+        ContactRoomDatabase.databaseWriteExecutor.execute(() -> contactDAO.delete(contactRoom));
     }
 }

@@ -6,4 +6,6 @@
     <string name="buttonSave">Save</string>
     <string name="empty">Enter all fields please</string>
     <string name="floatingButtonDescription">Add contact Button</string>
+    <string name="UpdateButton">Update</string>
+    <string name="deleteButton">Delete</string>
 </resources>
