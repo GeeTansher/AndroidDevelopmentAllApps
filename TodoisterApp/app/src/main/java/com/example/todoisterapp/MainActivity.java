@@ -1,20 +1,35 @@
 package com.example.todoisterapp;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.ui.AppBarConfiguration;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todoisterapp.adapter.RecyclerViewAdapter;
+import com.example.todoisterapp.adapter.onTodoClickListener;
 import com.example.todoisterapp.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.todoisterapp.model.Task;
+import com.example.todoisterapp.model.TaskViewModel;
+import com.example.todoisterapp.model.sharedViewModel;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements onTodoClickListener {
 
-    private AppBarConfiguration appBarConfiguration;
+    private static final String TAG = "item";
+    public RecyclerView recyclerView;
+    private TaskViewModel taskViewModel;
     private ActivityMainBinding binding;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private BottomSheetFragment bottomSheetFragment;
+    private sharedViewModel sharedViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +40,37 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        bottomSheetFragment = new BottomSheetFragment();
+        ConstraintLayout constraintLayout = findViewById(R.id.bottomSheet);
+
+        BottomSheetBehavior<ConstraintLayout> bottomSheetBehavior =
+                BottomSheetBehavior.from(constraintLayout);
+        bottomSheetBehavior.setPeekHeight(BottomSheetBehavior.STATE_HIDDEN);
+
+        sharedViewModel = new ViewModelProvider(this)
+                .get(sharedViewModel.class);
+
+        taskViewModel = new ViewModelProvider.AndroidViewModelFactory(
+                MainActivity.this.getApplication())
+                .create(TaskViewModel.class);
+
+        taskViewModel.getAllTasks().observe(this, tasks -> {
+            recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
+            recyclerView.setAdapter(recyclerViewAdapter);
         });
+
+        binding.fab.setOnClickListener(view -> {
+
+            showBottomSheet();
+        });
+    }
+
+    private void showBottomSheet() {
+        bottomSheetFragment.show(getSupportFragmentManager(), bottomSheetFragment.getTag());
     }
 
     @Override
@@ -56,4 +95,26 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onTodoClick(Task task) {
+        sharedViewModel.selectItem(task);
+        sharedViewModel.setEdit(true);
+        showBottomSheet();
+
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    @Override
+    public void onTodoRadioButtonClick(Task task) {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage("Surely you want to delete this Task?");
+        dialog.setPositiveButton("YES", (dialog12, which) -> {
+            TaskViewModel.deleteTask(task);
+            recyclerViewAdapter.notifyDataSetChanged();
+            Toast.makeText(this, "Deleted!!!", Toast.LENGTH_SHORT).show();
+        });
+        dialog.setNegativeButton("NO", (dialog1, which) -> {
+        });
+        dialog.show();
+    }
 }
