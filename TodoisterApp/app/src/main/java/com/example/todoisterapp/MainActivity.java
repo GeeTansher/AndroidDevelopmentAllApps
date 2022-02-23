@@ -1,9 +1,12 @@
 package com.example.todoisterapp;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -20,12 +23,13 @@ import com.example.todoisterapp.model.Task;
 import com.example.todoisterapp.model.TaskViewModel;
 import com.example.todoisterapp.model.sharedViewModel;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-
+// Todo: Can add one more item in menu for explaining working of app.
 public class MainActivity extends AppCompatActivity implements onTodoClickListener {
 
-    private static final String TAG = "item";
+//    private static final String TAG = "item";
     public RecyclerView recyclerView;
     private TaskViewModel taskViewModel;
+    private TextView textViewNull;
     private ActivityMainBinding binding;
     private RecyclerViewAdapter recyclerViewAdapter;
     private BottomSheetFragment bottomSheetFragment;
@@ -43,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements onTodoClickListen
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        textViewNull = findViewById(R.id.textViewNull);
 
         bottomSheetFragment = new BottomSheetFragment();
         ConstraintLayout constraintLayout = findViewById(R.id.bottomSheet);
@@ -59,14 +64,21 @@ public class MainActivity extends AppCompatActivity implements onTodoClickListen
                 .create(TaskViewModel.class);
 
         taskViewModel.getAllTasks().observe(this, tasks -> {
-            recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
-            recyclerView.setAdapter(recyclerViewAdapter);
+            if(tasks.size() <= 0)
+            {
+                textViewNull.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+            }
+            else
+            {
+                textViewNull.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+                recyclerViewAdapter = new RecyclerViewAdapter(tasks, this);
+                recyclerView.setAdapter(recyclerViewAdapter);
+            }
         });
 
-        binding.fab.setOnClickListener(view -> {
-
-            showBottomSheet();
-        });
+        binding.fab.setOnClickListener(view -> showBottomSheet());
     }
 
     private void showBottomSheet() {
@@ -89,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements onTodoClickListen
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(MainActivity.this,AboutActivity.class);
+            MainActivity.this.startActivity(intent);
             return true;
         }
 

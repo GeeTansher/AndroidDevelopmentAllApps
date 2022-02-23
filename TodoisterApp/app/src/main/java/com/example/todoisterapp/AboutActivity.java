@@ -1,8 +1,8 @@
 package com.example.todoisterapp;
 
-import android.os.Bundle;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
 
 public class AboutActivity extends AppCompatActivity {
 

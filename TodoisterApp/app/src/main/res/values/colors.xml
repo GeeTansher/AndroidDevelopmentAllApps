@@ -5,6 +5,8 @@
     <color name="purple_700">#D4002F</color>
     <color name="teal_200">#D4002F</color>
     <color name="teal_700">#D4002F</color>
-    <color name="black">#FFFFFF</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="chipColor">#FFE4E3E3</color>
+    <color name="chipStrokeColor">#F16C6C</color>
 </resources>

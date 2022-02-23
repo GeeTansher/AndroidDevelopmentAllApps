@@ -19,17 +19,27 @@ public class Task {
 
     @ColumnInfo(name = "due_date")
     public Date dueDate;
+    public int chipNo;
     @ColumnInfo(name = "created_date")
     public Date dateCreated;
     @ColumnInfo(name = "is_done")
     public boolean isdone;
 
-    public Task(String task, Priority priority, Date dueDate, Date dateCreated, boolean isdone) {
+    public Task(String task, Priority priority, Date dueDate, Date dateCreated, boolean isdone,int chipNo) {
         this.task = task;
         this.priority = priority;
         this.dueDate = dueDate;
         this.dateCreated = dateCreated;
         this.isdone = isdone;
+        this.chipNo = chipNo;
+    }
+
+    public int getChipNo() {
+        return chipNo;
+    }
+
+    public void setChipNo(int chipNo) {
+        this.chipNo = chipNo;
     }
 
     public long getTaskId() {

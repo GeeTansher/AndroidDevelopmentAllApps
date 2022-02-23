@@ -2,7 +2,6 @@ package com.example.todoisterapp;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.Group;
@@ -27,16 +27,14 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 /*
- Todo: 1. To save prev due date until not changed while updating
-  2. when bottom sheet appears for new Task after calling update
-  once get rid of Text in TextView.
-  3. change date if else like priority if else in itemClick
+ Todo: To check priorityRadioButton in update automatically acc. to data saved
 */
 public class BottomSheetFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
-    private static final String TAG = "Item";
+    //    private static final String TAG = "Item";
     Calendar date = Calendar.getInstance();   // to manage chips for date
     Calendar calendar = Calendar.getInstance(); // to create date
     private EditText enterTodo;
@@ -52,6 +50,10 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
     private sharedViewModel sharedViewModel;
     private boolean isEdit;
     private Priority priority;
+    private Chip todayChip;
+    private Chip nextWeekChip;
+    private Chip tomorrowChip;
+    private int chipNo;
 
     public BottomSheetFragment() {
     }
@@ -72,11 +74,11 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
 
         date.add(Calendar.DAY_OF_YEAR, 0);
 
-        Chip todayChip = view.findViewById(R.id.today_chip);
+        todayChip = view.findViewById(R.id.today_chip);
         todayChip.setOnClickListener(this);
-        Chip tomorrowChip = view.findViewById(R.id.tomorrow_chip);
+        tomorrowChip = view.findViewById(R.id.tomorrow_chip);
         tomorrowChip.setOnClickListener(this);
-        Chip nextWeekChip = view.findViewById(R.id.next_week_chip);
+        nextWeekChip = view.findViewById(R.id.next_week_chip);
         nextWeekChip.setOnClickListener(this);
 
         return view;
@@ -89,13 +91,43 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         if (sharedViewModel.getSelectItem().getValue() != null) {
             isEdit = sharedViewModel.isEdit();
             Task task = sharedViewModel.getSelectItem().getValue();
-            if (isEdit)
+            if (isEdit) {
+                if (task.chipNo == 0) {
+                    todayChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+                } else if (task.chipNo == 1) {
+                    tomorrowChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+                } else if (task.chipNo == 2) {
+                    nextWeekChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+                }
                 enterTodo.setText(task.getTask());
-            else
+                priority = task.getPriority();
+                dueDate = task.getDueDate();
+            } else {
                 enterTodo.setText("");
-//            Log.d(TAG, "onViewCreated: " + task.getTask());
+                priority = null;
+                dueDate = null;
+            }
         }
     }
+
+//    private void editPrioritySetter(View view) {
+//        if (priorityRadioGroup.getVisibility() == View.VISIBLE) {
+//            RadioButton selectedRadioButton;
+//            if (priority == Priority.HIGH) {
+//                selectedRadioButton = view.findViewById(R.id.radioButton_high);
+////                selectedRadioButton.setChecked(true);
+////                Log.d(TAG, "editPrioritySetter: "+priority);
+//            } else if (priority == Priority.MEDIUM) {
+////                selectedRadioButton = view.findViewById(R.id.radioButton_med);
+////                selectedRadioButton.setChecked(true);
+////                Log.d(TAG, "editPrioritySetter: "+priority);
+//            } else if (priority == Priority.LOW) {
+////                selectedRadioButton = view.findViewById(R.id.radioButton_low);
+////                selectedRadioButton.setChecked(true);
+////                Log.d(TAG, "editPrioritySetter: "+priority);
+//            }
+//        }
+//    }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -116,11 +148,13 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
             calendar.clear();
             calendar.set(year, month, dayOfMonth);
             dueDate = calendar.getTime();
+            chipNo = 4;
         });
 
         priorityButton.setOnClickListener(v -> {
             priorityRadioGroup.setVisibility(priorityRadioGroup.getVisibility() ==
                     View.GONE ? View.VISIBLE : View.GONE);
+//            editPrioritySetter(v);
             Utils.hideSoftKeyboard(v);
             priorityRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 if (priorityRadioGroup.getVisibility() == View.VISIBLE) {
@@ -144,10 +178,9 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         saveButton.setOnClickListener(v -> {
             String task = enterTodo.getText().toString().trim();
             if (!TextUtils.isEmpty(task) && dueDate != null && priority != null) {
-//                enterTodo.setText("");
                 Task myTask = new Task(task, priority, dueDate,
                         Calendar.getInstance().getTime(),
-                        false);
+                        false, chipNo);
                 if (isEdit) {
                     Task updateTask = sharedViewModel.getSelectItem().getValue();
                     assert updateTask != null;
@@ -155,10 +188,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                     updateTask.setDateCreated(Calendar.getInstance().getTime());
                     updateTask.setPriority(priority);
                     updateTask.setDueDate(dueDate);
+                    updateTask.setChipNo(chipNo);
                     TaskViewModel.updateTask(updateTask);
+                    chipNo = 4;
+                    Toast.makeText(getContext(), "Task updated...", Toast.LENGTH_SHORT).show();
                     sharedViewModel.setEdit(false);
                 } else {
                     TaskViewModel.insertTask(myTask);
+                    chipNo = 4;
+                    Toast.makeText(getContext(), "Task created...", Toast.LENGTH_SHORT).show();
                 }
                 enterTodo.setText("");
                 if (this.isVisible()) {
@@ -166,13 +204,12 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
                 }
 
             } else {
-                // TODO: show here a Toast or Snackbar, this is not working...
-//                enterTodo.setText("");
-//                if(this.isVisible()){
-//                    this.dismiss();
-//                }
-                Snackbar.make(saveButton, R.string.empty_field, Snackbar.LENGTH_SHORT)
-                        .show();
+                // Todo: If possible add animation here to shake whole bottomSheetFragment.
+                Snackbar.make(
+                        Objects.requireNonNull(getDialog()).getWindow().getDecorView(),
+                        R.string.snackbarBottomSheet,
+                        Snackbar.LENGTH_SHORT
+                ).show();
             }
         });
 
@@ -184,19 +221,27 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
         if (id == R.id.today_chip) {
             // set date for today
             calendar.clear();
+            nextWeekChip.setChipStrokeColorResource(R.color.chipColor);
+            tomorrowChip.setChipStrokeColorResource(R.color.chipColor);
+            todayChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+            chipNo = 0;
+
             calendar.set(date.get(Calendar.YEAR),
                     date.get(Calendar.MONTH),
                     date.get(Calendar.DAY_OF_MONTH));
             dueDate = calendar.getTime();
-            Log.d("Time", "onClick: " + dueDate);
         } else if (id == R.id.tomorrow_chip) {
             // 1 day from today
             calendar.clear();
+            todayChip.setChipStrokeColorResource(R.color.chipColor);
+            nextWeekChip.setChipStrokeColorResource(R.color.chipColor);
+            tomorrowChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+            chipNo = 1;
+
             calendar.set(date.get(Calendar.YEAR),
                     date.get(Calendar.MONTH),
                     date.get(Calendar.DAY_OF_MONTH) + 1);
             dueDate = calendar.getTime();
-            Log.d("Time", "onClick: " + dueDate);
         } else if (id == R.id.next_week_chip) {
             // 7 days from today
 
@@ -205,11 +250,15 @@ public class BottomSheetFragment extends BottomSheetDialogFragment implements Vi
 //            calendar.add(date.get(Calendar.DAY_OF_YEAR),7);
 
             calendar.clear();
+            todayChip.setChipStrokeColorResource(R.color.chipColor);
+            tomorrowChip.setChipStrokeColorResource(R.color.chipColor);
+            nextWeekChip.setChipStrokeColorResource(R.color.chipStrokeColor);
+            chipNo = 2;
+
             calendar.set(date.get(Calendar.YEAR),
                     date.get(Calendar.MONTH),
                     date.get(Calendar.DAY_OF_MONTH) + 7);
             dueDate = calendar.getTime();
-            Log.d("Time", "onClick: " + dueDate);
         }
 
     }

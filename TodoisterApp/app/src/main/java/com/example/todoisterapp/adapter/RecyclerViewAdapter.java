@@ -89,6 +89,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 onTodoClickListener.onTodoClick(currTask);
             } else if (id == R.id.todo_radio_button) {
                 onTodoClickListener.onTodoRadioButtonClick(currTask);
+                radioButton.setChecked(false);
             }
         }
     }
