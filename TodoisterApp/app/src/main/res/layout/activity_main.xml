@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -26,8 +27,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="170dp"
+        android:layout_marginBottom="30dp"
         app:srcCompat="@android:drawable/ic_dialog_email"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck" />
 
@@ -44,7 +45,7 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimen_60"
+        android:layout_marginTop="58dp"
         android:padding="@dimen/recycler_padding"
         android:visibility="visible">
 
