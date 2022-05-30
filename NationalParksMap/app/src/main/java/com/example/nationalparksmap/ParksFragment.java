@@ -36,8 +36,7 @@ public class ParksFragment extends Fragment implements OnParkClickListener {
 
 
     public static ParksFragment newInstance() {
-        ParksFragment fragment = new ParksFragment();
-        return fragment;
+        return new ParksFragment();
     }
 
     @Override
@@ -46,10 +45,9 @@ public class ParksFragment extends Fragment implements OnParkClickListener {
 
         parkViewModel = new ViewModelProvider(requireActivity())
                 .get(ParkViewModel.class);
-        Log.d("size", String.valueOf(parkList.size()));
+
         if(parkViewModel.getParks().getValue() != null){
             parkList = parkViewModel.getParks().getValue();
-            Log.d("size", String.valueOf(parkList.size()));
             parkRecyclerViewAdapter = new ParkRecyclerViewAdapter(parkList,this);
             recyclerView.setAdapter(parkRecyclerViewAdapter);
         }
