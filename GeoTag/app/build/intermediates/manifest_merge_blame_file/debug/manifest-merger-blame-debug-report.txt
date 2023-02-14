@@ -1,0 +1,126 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.geotag"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:5:5-80
+11-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:5:22-77
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:6:5-81
+12-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:6:22-78
+13    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+13-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:7:5-82
+13-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:7:22-79
+14    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+14-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:8:5-81
+14-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:8:22-78
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:9:5-79
+15-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:9:22-76
+16
+17    <permission
+17-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+18        android:name="com.example.geotag.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="com.example.geotag.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+22
+23    <application
+23-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:11:5-29:19
+24        android:allowBackup="true"
+24-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:12:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.9.0] C:\Users\vrgpv\.gradle\caches\transforms-3\85625968673fb9fd8db34217596f6efd\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+26        android:dataExtractionRules="@xml/data_extraction_rules"
+26-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:13:9-65
+27        android:debuggable="true"
+28        android:fullBackupContent="@xml/backup_rules"
+28-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:14:9-54
+29        android:icon="@mipmap/ic_launcher"
+29-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:15:9-43
+30        android:label="@string/app_name"
+30-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:16:9-41
+31        android:supportsRtl="true"
+31-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:17:9-35
+32        android:testOnly="true"
+33        android:theme="@style/Theme.GeoTag" >
+33-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:18:9-44
+34        <activity
+34-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:20:9-28:20
+35            android:name="com.example.geotag.MainActivity"
+35-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:21:13-41
+36            android:exported="true" >
+36-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:22:13-36
+37            <intent-filter>
+37-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:23:13-27:29
+38                <action android:name="android.intent.action.MAIN" />
+38-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:24:17-69
+38-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:24:25-66
+39
+40                <category android:name="android.intent.category.LAUNCHER" />
+40-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:26:17-77
+40-->D:\AndroidDevelopmentAllApps\GeoTag\app\src\main\AndroidManifest.xml:26:27-74
+41            </intent-filter>
+42        </activity>
+43
+44        <service
+44-->[androidx.room:room-runtime:2.5.0] C:\Users\vrgpv\.gradle\caches\transforms-3\cbe29b2933b760da93a7f56f17896529\transformed\room-runtime-2.5.0\AndroidManifest.xml:24:9-28:63
+45            android:name="androidx.room.MultiInstanceInvalidationService"
+45-->[androidx.room:room-runtime:2.5.0] C:\Users\vrgpv\.gradle\caches\transforms-3\cbe29b2933b760da93a7f56f17896529\transformed\room-runtime-2.5.0\AndroidManifest.xml:25:13-74
+46            android:directBootAware="true"
+46-->[androidx.room:room-runtime:2.5.0] C:\Users\vrgpv\.gradle\caches\transforms-3\cbe29b2933b760da93a7f56f17896529\transformed\room-runtime-2.5.0\AndroidManifest.xml:26:13-43
+47            android:exported="false" />
+47-->[androidx.room:room-runtime:2.5.0] C:\Users\vrgpv\.gradle\caches\transforms-3\cbe29b2933b760da93a7f56f17896529\transformed\room-runtime-2.5.0\AndroidManifest.xml:27:13-37
+48
+49        <activity
+49-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\35271680ec230fcd2d4096efcc24fc95\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+50            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+50-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\35271680ec230fcd2d4096efcc24fc95\transformed\play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+51            android:exported="false"
+51-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\35271680ec230fcd2d4096efcc24fc95\transformed\play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+52            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+52-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\35271680ec230fcd2d4096efcc24fc95\transformed\play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+53
+54        <meta-data
+54-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\ba21e28099920bffc7b10aade4e3716c\transformed\play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+55            android:name="com.google.android.gms.version"
+55-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\ba21e28099920bffc7b10aade4e3716c\transformed\play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+56            android:value="@integer/google_play_services_version" />
+56-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\vrgpv\.gradle\caches\transforms-3\ba21e28099920bffc7b10aade4e3716c\transformed\play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+57
+58        <provider
+58-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+59            android:name="androidx.startup.InitializationProvider"
+59-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+60            android:authorities="com.example.geotag.androidx-startup"
+60-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+61            android:exported="false" >
+61-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+62            <meta-data
+62-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+63                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+64                android:value="androidx.startup" />
+64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\vrgpv\.gradle\caches\transforms-3\7efe218e7ae35cb58dbf86d5ee36a529\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+65            <meta-data
+65-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\vrgpv\.gradle\caches\transforms-3\7495f4090f64d34b46f8102bfc12da1e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+66                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+66-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\vrgpv\.gradle\caches\transforms-3\7495f4090f64d34b46f8102bfc12da1e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+67                android:value="androidx.startup" />
+67-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\vrgpv\.gradle\caches\transforms-3\7495f4090f64d34b46f8102bfc12da1e\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+68        </provider>
+69    </application>
+70
+71</manifest>

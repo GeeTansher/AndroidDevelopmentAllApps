@@ -1,0 +1,3 @@
+D:/AndroidDevelopmentAllApps/GeoTag/opencv/.cxx/Debug/3o2q3j52/x86_64/CMakeFiles/opencv_jni_shared.dir
+D:/AndroidDevelopmentAllApps/GeoTag/opencv/.cxx/Debug/3o2q3j52/x86_64/CMakeFiles/edit_cache.dir
+D:/AndroidDevelopmentAllApps/GeoTag/opencv/.cxx/Debug/3o2q3j52/x86_64/CMakeFiles/rebuild_cache.dir
