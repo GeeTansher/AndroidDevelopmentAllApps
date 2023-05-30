@@ -1,3 +1,0 @@
-com.example.geotag.test
-style WhiteBackgroundDialogTheme
-style WhiteBackgroundTheme
