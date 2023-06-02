@@ -11,4 +11,7 @@
     <string name="username">Username</string>
     <string name="postTitle">Title</string>
     <string name="postThoughts">Your thoughts...</string>
+    <string name="menu_title">Add thoughts</string>
+    <string name="no_thoughts">Add you first thought!</string>
+    <string name="share_journal">ShareJournal</string>
 </resources>

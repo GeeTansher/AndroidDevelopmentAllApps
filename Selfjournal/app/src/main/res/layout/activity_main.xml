@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_bg"
     android:padding="18dp"
     android:gravity="center"
     tools:context=".MainActivity">
@@ -44,7 +45,7 @@
         android:id="@+id/btnGetStarted"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#E91E63"
+        android:textColor="@color/yellowBg"
         android:background="@android:color/transparent"
         android:text="@string/getStarted">
 

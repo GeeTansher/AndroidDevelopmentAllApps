@@ -26,6 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import util.journalApi;
 
@@ -35,7 +36,7 @@ public class CreateAccount extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authStateListener;
     private FirebaseUser currentUser;
 
-    // FireStore connction
+    // FireStore connection
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference collectionReference = db.collection("Users");
 
@@ -46,6 +47,7 @@ public class CreateAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        Objects.requireNonNull(getSupportActionBar()).setElevation(0);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -138,19 +140,20 @@ public class CreateAccount extends AppCompatActivity {
                                         .addOnFailureListener(new OnFailureListener() {
                                             @Override
                                             public void onFailure(@NonNull Exception e) {
-
+                                                Toast.makeText(CreateAccount.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                                             }
                                         });
                             }
                             else{
                                 // something went wrong
+                                Toast.makeText(CreateAccount.this, "Creating account failed. Try again.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-
+                            Toast.makeText(CreateAccount.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
         }
